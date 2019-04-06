@@ -1,0 +1,67 @@
+01) Unzip the Snake.zip file. Password is hackthebox.
+
+02) Inspected the file snake.py and found some intersting variables, the 
+   variables are scattered thru the code, so I grouped the to make it easier 
+   to read.
+
+03) There are 5 lists and 7 chars, all in hexa that represents ACSII chars, so
+   I converted them to inspect their values. Use 
+   https://www.rapidtables.com/convert/number/ascii-hex-bin-dec-converter.html
+   
+   chains   = "this is a troll"
+   keys     = "password!!"
+   password = "its not that easy"
+   auth     = "keep trying"
+   aa = 'a'
+   db = 'n'
+   nn = 'a'
+   ef = 'c'
+   rr = 'o'
+   gh = 'n'
+   lr = 'd'
+   ty = 'a'
+
+04) I found the slither variable too. That by the code bellow composes the 
+    username = anaconda.
+	  
+	slither = aa + db + nn + ef + rr + gh + lr + ty
+	user_input = raw_input('Enter your username\n')
+	if user_input == slither:
+	   pass
+	
+05) Half of the flag done HTB{anaconda:password}, let's hunt the password info.
+
+06) This part of the code is in charge of password checking:
+   
+   pass_input = raw_input('Enter your password\n')
+   for passes in pass_input:            <-- These loops searches user password
+      for char in chars:                <-- input inside chars variable.
+	     if passes == str(chr(char)):   <-- However it just check for the 1st char at the input.
+		    print 'Good Job'            <-- If it matches, print the msg.
+            break                       <-- And leave.
+         else:
+            print 'Wrong password try harder'
+            exit(0)
+      break
+
+07) Checking for chars variable I found it is composed by the code bellow:
+
+   for key in keys:                 <-- This part scrambles the characters in keys 
+      keys_encrypt = lock ^ key     <-- variable and appends it to the chars.
+	  chars.append(keys_encrypt)
+   for chain in chains:             <-- This part scrambles the characters in chains
+      chains_encrypt = chain + 0xA  <-- variable and appends it to the chars.
+	  chars.append(chains_encrypt)
+
+08) So chars variable is composed by scambled keys + scrambled chains, however,
+   for the code, just the first character of scrambled keys is considered by
+   the password checking routine.
+
+09) I will test keys or keys + chains as passwords:
+      HTB{anaconda:password!!}
+	  HTB{anaconda:password!!this is a troll}
+	None worked.
+	
+10) I ran the code at 07, got the scrambled strings and tested again with
+    scambled strings.
+	HTB{anaconda:udvvrjwa$$} <-- this worked.

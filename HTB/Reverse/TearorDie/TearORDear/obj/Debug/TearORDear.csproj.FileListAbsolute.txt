@@ -1,0 +1,9 @@
+C:\Users\afuka\Downloads\TearorDie\TearORDear\bin\Debug\TearORDear.exe
+C:\Users\afuka\Downloads\TearorDie\TearORDear\bin\Debug\TearORDear.pdb
+C:\Users\afuka\Downloads\TearorDie\TearORDear\obj\Debug\TearORDear.csprojAssemblyReference.cache
+C:\Users\afuka\Downloads\TearorDie\TearORDear\obj\Debug\TearORDear.LoginForm.resources
+C:\Users\afuka\Downloads\TearorDie\TearORDear\obj\Debug\TearORDear.Properties.Resources.resources
+C:\Users\afuka\Downloads\TearorDie\TearORDear\obj\Debug\TearORDear.csproj.GenerateResource.cache
+C:\Users\afuka\Downloads\TearorDie\TearORDear\obj\Debug\TearORDear.csproj.CoreCompileInputs.cache
+C:\Users\afuka\Downloads\TearorDie\TearORDear\obj\Debug\TearORDear.exe
+C:\Users\afuka\Downloads\TearorDie\TearORDear\obj\Debug\TearORDear.pdb
