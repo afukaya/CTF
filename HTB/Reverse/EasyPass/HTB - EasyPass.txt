@@ -1,0 +1,29 @@
+1) Unzip the file EasyPass.zip. Password hackthebox.
+
+2) Check the file with DIE to verify what is the EXE type.
+	PE - Compiler -  Borland Delphi(7) -Windows Binary.
+
+3) Open the binary with x32DBG to check how it works.
+	- Execute until you get out NT Loader program loader - ntdll.dll
+	- The code at EasyPass entry point has 5 calls.
+	- Checks what each call does.
+		45445B - Func1 - Aparently does nothing, check later if necessary.
+		454467 - FuncB - Aparently does nothing, check later if necessary.
+		45447F - FuncC - Aparently does nothing, check later if necessary.
+		45448B - Main  - Calls user interface. - Break into.
+		
+	- Reset the execution and enter this funcion.
+		- After some cycles, I noticed the program goes around a call at 45296E sub_452734 (Dialog).
+		- sub_452734 makes two calls sub_45269C e sub_4530C4, one of them check the password.
+	
+	- Diving sub_45269C
+		- 004526AF call <JMP.&PeekMessageA> after this call the program makes a series of conditional calls
+		   for the fucntions bellow.
+		- 004526D8 call dword ptr ds:[esi+D8]
+		- 004526E2 call <easypass.sub_4525FC>
+		- 004526F5 call <easypass.sub_4524F4>
+		- 00452702 call <easypass.Func2C>
+		0045270F | E8 BCFDFFFF              | call <easypass.Func2D>                  |
+	
+	Depois de muito sobre e desce com os breakpoints - 434501 - Captura o botão check password.
+	fortran!
